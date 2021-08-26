@@ -1,13 +1,23 @@
-import './formulario.css'
-import axios from 'axios'
-import * as React from 'react'
+import './formulario.css';
+import axios from 'axios';
+import * as React from 'react';
 
 var testeData = Date()
 
 var cad = 'cadastrado'
+interface IForm {
+  id: string;
+  name: string;
+  empresa: string;
+  number: string;
+  date: string;
+  leds: string;
+  recado: string;
+}
 
 class formulario extends React.Component<any, any> {
-  constructor(props) {
+  state:IForm
+  constructor(props:IForm) {
     super(props);
     this.state = { id: '', name: '', empresa: '', number: '' , date: '', leds:'', recado:''};
 
@@ -21,25 +31,25 @@ class formulario extends React.Component<any, any> {
   }
   
 
-  handleChangeI(event) {
+  handleChangeI(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ id: event.target.value });
   }
-  handleChangeN(event) {
+  handleChangeN(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ name: event.target.value });
   }
-  handleChangeM(event) {
+  handleChangeM(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ empresa: event.target.value });
   }
-  handleChangeU(event) {
+  handleChangeU(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ number: event.target.value });
   }
-  handleChangeR(event) {
+  handleChangeR(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ recado: event.target.value });
   }
   
 
 
-  handleSubmit(event) {
+  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const name = this.state.name;
     const id = this.state.id;
@@ -61,23 +71,23 @@ class formulario extends React.Component<any, any> {
         recado : recado
       }
     });
-    let content = document.getElementById('area')
+    let content = document.getElementById('area');
 
     let carregando = `<p>CARREGANDO...</p>`
 
     let pronto = `<p class="cadastrado">CADASTRADO</p>`
 
-    content.innerHTML = carregando
+    content!.innerHTML = carregando
 
 
     setTimeout(() => {
-        content.innerHTML = pronto
+        content!.innerHTML = pronto
     }, 1000)
   }
 
   render() {
     return (
-      <section class="contact-area">
+      <section className="contact-area">
       <div id ="area">
         <fieldset>
         <h3>Cadastro de clientes</h3>
